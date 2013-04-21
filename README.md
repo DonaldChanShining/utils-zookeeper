@@ -2,9 +2,13 @@ Introduction
 ============
 The project represents a set of utility classes and wrappers around [ZooKeeper](http://zookeeper.apache.org/).
 
+Requirements
+============
+* java 1.7
+
 Download
 ========
-You can download pre-built binaries directly from the [github downloads page](https://github.com/linkedin/linkedin-zookeeper/downloads)
+You can download pre-built binaries directly from [bintray](http://dl.bintray.com/content/pongasoft/utils-zookeeper)
 
 * `org.linkedin.zookeeper-server-<version>.tgz`:
   A simple to use prepackaged zookeeper distribution:
@@ -24,7 +28,7 @@ Compilation
 ===========
 In order to compile the code you need
 
-* java 1.6
+* java 1.7
 
 At the top simply run
 
@@ -51,7 +55,7 @@ Contains a set of utility classes and wrappers to make it easier to use ZooKeepe
   * `IZKClient` (which extends from `IZooKeeper`) adds a host of convenient calls and lifecycle listeners
   * `ZooKeeperURLHandler` is a URL handler which knows how to handle `zookeeper:/a/b/c` type urls
   * `ZooKeeperTreeTracker` (the core of this project) essentially keeps an in memory replica of a portion
-of a tree or entire subtree with easy to use listeners (`NodeEventsListener` and `ErrorListener`): you get notified when nodes are added, updated or deleted (you never deal with ZooKeeper watchers, nor have to set them over and over!). You can see a good example of how to use this class in the glu project [org.linkedin.glu.agent.tracker.AgentsTrackerImpl](https://github.com/linkedin/glu/blob/master/agent/org.linkedin.glu.agent-tracker/src/main/groovy/org/linkedin/glu/agent/tracker/AgentsTrackerImpl.groovy)
+of a tree or entire subtree with easy to use listeners (`NodeEventsListener` and `ErrorListener`): you get notified when nodes are added, updated or deleted (you never deal with ZooKeeper watchers, nor have to set them over and over!). You can see a good example of how to use this class in the glu project [org.linkedin.glu.agent.tracker.AgentsTrackerImpl](https://github.com/pongasoft/glu/blob/master/agent/org.linkedin.glu.agent-tracker/src/main/groovy/org/linkedin/glu/agent/tracker/AgentsTrackerImpl.groovy)
   * `StandaloneZooKeeperServer`: a simple class to start a standalone ZooKeeper server (simple to use
 in testing)
 
@@ -102,7 +106,7 @@ Note: it should work on any Linux/Unix based system (developped/tested on Mac OS
 
 Build configuration
 ===================
-The project uses the [`org.linkedin.userConfig`](https://github.com/linkedin/gradle-plugins/blob/master/README.md) plugin and as such can be configured
+The project uses the [`org.linkedin.userConfig`](https://github.com/pongasoft/gradle-plugins/blob/master/README.md) plugin and as such can be configured
 
     Example:
     ~/.userConfig.properties

@@ -23,37 +23,57 @@ def topPublishDir = new File(userConfig.top.publish.dir ?: "${topBuildDir}/publi
  * Repositories for build
  */
 allRepositories.build = {
-  add(new org.apache.ivy.plugins.resolver.FileSystemResolver()) {
+  ivy {
     name = "build-release"
-    addIvyPattern "${topReleaseDir}/[organisation]/[module]/[revision]/[module]-[revision].ivy"
-    addArtifactPattern "${topReleaseDir}/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-    m2compatible = true
-    checkmodified = true
+    url = topReleaseDir
+    layout 'maven'
   }
 
   mavenRepo name: 'build-publish', url: topPublishDir.toURI()
 
   mavenCentral()
-}
 
-/**
- * Repositories for buildScript
- */
-allRepositories.buildscript = allRepositories.build
+  bintray.jcenter()
+}
 
 /**
  * Repositories for release
  */
 allRepositories.snapshotRelease = {
-  add(new org.apache.ivy.plugins.resolver.FileSystemResolver()) {
-    name = 'local-release'
-    addIvyPattern "${topReleaseDir}/[organisation]/[module]/[revision]/[module]-[revision].ivy"
-    addArtifactPattern "${topReleaseDir}/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-    m2compatible = true
+  ivy {
+    name = "local-release"
+    url = topReleaseDir
+    layout 'maven'
   }
 }
 
 allRepositories.release = allRepositories.snapshotRelease
+
+def pomConfig =  { pomToConfigure ->
+  pomToConfigure.project {
+    name project.rootProject.name
+    description 'The project represents a set of utility classes and wrappers around ZooKeeper'
+    url 'http://github.com/pongasoft/utils-zookeeper'
+    licenses {
+      license {
+        name 'The Apache Software License, Version 2.0'
+        url 'http://www.apache.org/licenses/LICENSE-2.0'
+      }
+    }
+    developers {
+      developer {
+        id 'ypujante'
+        name 'Yan Pujante'
+        email 'yan@pongasoft.com'
+      }
+    }
+    scm {
+      connection "scm:git:${spec.scmUrl}"
+      developerConnection "scm:git:${spec.scmUrl}"
+      url spec.scmUrl
+    }
+  }
+}
 
 /**
  * Repositories for publish
@@ -61,32 +81,19 @@ allRepositories.release = allRepositories.snapshotRelease
 allRepositories.snapshotPublish = {
   mavenDeployer {
     repository(url: "file://localhost${topPublishDir}")
-    pom.whenConfigured { pomToConfigure ->
-      pomToConfigure.project {
-        name project.name
-        description 'The project represents a set of utility classes and wrappers around ZooKeeper'
-        url 'http://github.com/linkedin/linkedin-utils'
-        licenses {
-          license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0'
-          }
-        }
-        developers {
-          developer {
-            id 'ypujante'
-            name 'Yan Pujante'
-            email 'yan@pongasoft.com'
-          }
-        }
-        scm {
-          connection "scm:git:${spec.scmUrl}"
-          developerConnection "scm:git:${spec.scmUrl}"
-          url spec.scmUrl
-        }
-      }
-    }
+    pom.whenConfigured(pomConfig)
   }
 }
 
-allRepositories.publish = allRepositories.snapshotPublish
+/**
+ * Bintray binaries / maven style
+ */
+allRepositories.publish = bintray.binaries.mavenRepo {
+  pom.whenConfigured(pomConfig)
+}
+
+/**
+ * Distributions go to a different location
+ */
+allRepositories.distributions = bintray.distributions.ivyRepo()
+

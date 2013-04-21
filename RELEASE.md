@@ -1,3 +1,10 @@
+2.0.0 (2013/04/21)
+------------------
+* use of `jdk1.7` (now required)
+* use of `gradle 1.5`
+* publishing to [bintray](https://bintray.com/pkg/show/general/pongasoft/binaries/utils-zookeeper) (jcenter)
+* forked project under [pongasoft/utils-zookeeper](https://github.com/pongasoft/utils-zookeeper)
+
 1.5.1 (2013/04/16)
 ------------------
 * Implemented [#14](https://github.com/linkedin/linkedin-zookeeper/issues/14) _Race condition? glu-210_

@@ -16,14 +16,14 @@
  */
 
 spec = [
-  name: 'linkedin-zookeeper',
-  group: 'org.linkedin',
-  version: '1.5.1',
+  name: 'utils-zookeeper',
+  group: 'org.pongasoft',
+  version: '2.0.0',
 
   versions: [
-    jdk: '1.6',
+    jdk: '1.7',
     groovy: '2.0.7',
-    linkedinUtils: '1.9.0',
+    utilsMisc: '2.0.0',
     slf4j: '1.6.2' // to be compatible with grails 2.2.1
   ],
 
@@ -37,7 +37,7 @@ spec = [
   ]
 ]
 
-spec.scmUrl = "git@github.com:linkedin/${spec.name}.git"
+spec.scmUrl = "git@github.com:pongasoft/${spec.name}.git"
 
 /**
  * External dependencies
@@ -47,11 +47,29 @@ spec.external = [
   groovy: "org.codehaus.groovy:groovy-all:${spec.versions.groovy}",
   groovyTest: "org.codehaus.groovy:groovy-test:${spec.versions.groovy}",
   junit: 'junit:junit:4.10',
-  linkedinUtilsCore: "org.linkedin:org.linkedin.util-core:${spec.versions.linkedinUtils}",
-  linkedinUtilsGroovy: "org.linkedin:org.linkedin.util-groovy:${spec.versions.linkedinUtils}",
+  utilsMiscCore: "org.pongasoft:org.linkedin.util-core:${spec.versions.utilsMisc}",
+  utilsMiscGroovy: "org.pongasoft:org.linkedin.util-groovy:${spec.versions.utilsMisc}",
   log4j: 'log4j:log4j:1.2.16',
   slf4j: "org.slf4j:slf4j-api:${spec.versions.slf4j}",
   slf4jLog4j: "org.slf4j:slf4j-log4j12:${spec.versions.slf4j}",
   slf4jJul: "org.slf4j:jul-to-slf4j:${spec.versions.slf4j}",
   zookeeper: 'org.apache.zookeeper:zookeeper:3.4.5'
 ]
+
+// information about the bintray distribution
+spec.bintray = [
+  apiBaseUrl: 'https://bintray.com/api/v1',
+  username: 'yan',
+  pkgOrganization: 'pongasoft',
+  repositories: [
+    binaries: [
+      pkgRepository: 'binaries',
+      pkgName: spec.name
+    ],
+    distributions: [
+      pkgRepository: spec.name,
+      pkgName: 'releases'
+    ],
+  ]
+]
+

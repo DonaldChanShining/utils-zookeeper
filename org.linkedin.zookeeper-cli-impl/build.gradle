@@ -20,8 +20,8 @@ apply plugin: 'org.linkedin.release'
 
 dependencies {
   compile project(':org.linkedin.zookeeper-impl')
-  compile spec.external.linkedinUtilsCore
-  compile spec.external.linkedinUtilsGroovy
+  compile spec.external.utilsMiscCore
+  compile spec.external.utilsMiscGroovy
   compile spec.external.slf4j
   compile spec.external.zookeeper
   compile spec.external.groovy
