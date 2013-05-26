@@ -44,7 +44,7 @@ buildscript {
  }
 
   dependencies {
-    classpath 'org.pongasoft:org.linkedin.gradle-plugins:2.1.0'
+    classpath 'org.pongasoft:org.linkedin.gradle-plugins:2.2.0'
   }
 }
 
@@ -63,6 +63,8 @@ allprojects {
 
 // we use git
 idea.project {
+  jdkName = spec.versions.jdk
+  languageLevel = spec.versions.jdk
   ipr.withXml { root ->
     root.asNode().component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git'
   }
@@ -83,5 +85,5 @@ subprojects { p ->
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '1.5'
+  gradleVersion = '1.6'
 }
