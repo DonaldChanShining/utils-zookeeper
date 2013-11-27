@@ -18,12 +18,12 @@
 spec = [
   name: 'utils-zookeeper',
   group: 'org.pongasoft',
-  version: '2.0.0',
+  version: '2.0.1',
 
   versions: [
     jdk: '1.7',
     groovy: '2.0.7',
-    utilsMisc: '2.0.0',
+    utilsMisc: '2.0.2',
     slf4j: '1.6.2' // to be compatible with grails 2.2.1
   ],
 

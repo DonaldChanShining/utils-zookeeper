@@ -61,15 +61,7 @@ public class ZooKeeperURLHandler extends URLStreamHandler
       {
         return new ByteArrayInputStream(_zk.getData(url.getPath()));
       }
-      catch(InternalException e)
-      {
-        throw new IOException(e);
-      }
-      catch(InterruptedException e)
-      {
-        throw new IOException(e);
-      }
-      catch(KeeperException e)
+      catch(InternalException | InterruptedException | KeeperException e)
       {
         throw new IOException(e);
       }
