@@ -1,5 +1,6 @@
-2.0.1 (2013/11/27)
+2.0.2 (2013/11/27)
 ------------------
+* make some files executable
 * use of `utils-misc 2.0.2`
 * use of `gradle 1.9`
 
