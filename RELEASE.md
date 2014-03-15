@@ -1,3 +1,8 @@
+2.0.3 (2014/03/14)
+------------------
+* use of `utils-misc 2.0.3`
+* use of `gradle 1.11`
+
 2.0.2 (2013/11/27)
 ------------------
 * make some files executable
